@@ -363,7 +363,7 @@ class BLymphocyte extends ImmuneCell {
                 super.changeDirection(spleen.sections, spleen.sections.length);
             }
             if (this.target != null && doCirclesIntersect(this.x, this.y, this.radius, this.target.x, this.target.y, this.target.size/2)){
-                if (this.target.antigen != null && doCirclesIntersect(this.target.x, this.target.y, this.target.size/2, this.target.antigen.x, this.target.antigen.y, this.target.antigen.radius) && randomUniform(0, 1) < 0.01){
+                if (this.target.antigen != null && doCirclesIntersect(this.target.x, this.target.y, this.target.size/2, this.target.antigen.x, this.target.antigen.y, this.target.antigen.radius) && randomUniform(0, 1) < trainingProbability){
                     this.texture = bacteriaColors[this.target.antigen.color]["lymphocyteImage"];
                     this.color = this.target.antigen.color;
                     this.mode = "mature";

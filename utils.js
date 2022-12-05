@@ -106,6 +106,18 @@ function roundRect(ctx, x, y, width, height, leftRadius, rightRadius, fill = fal
       }
     }
 
+function drawBlackScreen(alpha, highlight_x, highlight_y, highlight_width, highlight_height, radius) {
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, fieldWidth, fieldHeight);
+
+    ctx.fillStyle = "white";
+    roundRect(ctx, highlight_x, highlight_y, highlight_width, highlight_height,
+         leftRadius=radius, rightRadius=radius, fill=true);
+
+    ctx.globalAlpha = 1;
+}
+
 //--------OTHER SUPPORT----------
 function clip(x, min, max) {
     return Math.min(Math.max(min, x), max);

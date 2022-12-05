@@ -13,8 +13,8 @@ var texts = {
         back: {eng: "Back", rus: "Назад"},
         testerTeam: {eng: "Tester team", rus: "Тестировщики"},
         testerList: {eng: ["Andrey Biba", "Olesya Biba", "Roman Soldatov"], rus: ["Андрей Биба", "Олеся Биба", "Роман Солдатов"]},
-        authorInfo: {eng: ["Design by", "BioMolText 2022"], 
-                     rus: ["Дизайн от", "Био/Мол/Текст-2022"]},
+        authorInfo: {eng: ["Design by ", "BioMolText 2022"], 
+                     rus: ["Дизайн от ", "Био/Мол/Текст-2022"]},
         contacts: {eng: "Contacts", rus:"Контакты"},
         dmitryBiba: {eng: "Dmitry Biba", rus: "Дмитрий Биба"},
         vladimirShitov: {eng: "Vladimir Shitov", rus: "Владимир Шитов"},
@@ -89,6 +89,17 @@ const playableFieldWidth = 0.86*fieldWidth;
 const playableFieldBorderColor = "#422D0D"
 const tissueCellsLeftOffset = 0.007263922*playableFieldWidth;
 const tissueCellsUpOffset = 0.017452*playableFieldHeight;
+
+const TUTORIAL_WINDOW_WIDTH = 500 / 1440 * fieldWidth;
+const TUTORIAL_WINDOW_HEIGHT = 250 / 1068 * fieldHeight;
+const TUTORIAL_WINDOW_Y_OFFSET = 100 / 1068 * fieldHeight;
+const TUTORIAL_WINDOW_TEXT_OFFSET = 30 / 1440 * fieldWidth;
+const TUTORIAL_WINDOW_LINE_HEIGHT = 25 / 1068 * fieldHeight;
+const TUTORIAL_WINDOW_OK_X_OFFSET = 60 / 1440 * fieldWidth;
+const TUTORIAL_WINDOW_OK_Y_OFFSET = 47 / 1068 * fieldHeight;
+const TUTORIAL_WINDOW_BUTTON_X_OFFSET = 70 / 1440 * fieldWidth;
+const TUTORIAL_WINDOW_BUTTON_Y_OFFSET = 70 / 1068 * fieldHeight;
+
 
 // Top menu
 const topMenuColor = "#142029";
@@ -311,8 +322,31 @@ const shopWidth =  0.085417*fieldWidth;
 const shopHeight = 0.16*fieldHeight;
 const spaceBetweenShops = 0.0125*fieldWidth;
 const xLeftOffset = playableFieldX;
+
 const priceHeight = shopHeight*0.125
- var ShopColors = {
+
+const wavesFillingOpacity = 0.6;
+
+const AUTHORS_INFO = ["Dmitry Biba & Vladimir Shitov",
+                      "Design by Anastasia Troshina",
+                      "BioMolText 2022"];
+
+// Tutorial
+BLACK_SCREEN_ALPHA = 0.5;
+
+// fieldwidth = 1440 
+// fieldheight = 1068
+
+const SCROLL_IMAGE = new Image();
+SCROLL_IMAGE.src = "./images/scroll.png";
+
+const LYMPHOCYTES_IMAGES = new Map();  // Map from color to image of lymphocytes
+const BACTERIA_IMAGES = new Map();  // Map from color to image of bacteria
+
+const HELMINTH_IMAGE = new Image();
+HELMINTH_IMAGE.src = "./images/helminth.png";
+
+var ShopColors = {
     blue:{
         pocketImageV: FIRST_POCKET_V,        
         colorCode: "#005FA4",
@@ -344,6 +378,9 @@ const ANIMATED_IMAGE_HEIGHT = 100;
 const STATIC_IMAGE_WIDTH = 200;
 const STATIC_IMAGE_HEIGHT = 200;
 
+const LYMPHOCYTES_DEFAULT_IMAGE = new Image();
+LYMPHOCYTES_DEFAULT_IMAGE.src = "./images/lymphocyte_test.png";
+
 const GARBAGE_IMAGE_1 = new Image();
 GARBAGE_IMAGE_1.src = "./images/garbage_1.png";
 const GARBAGE_IMAGE_2 = new Image();
@@ -352,11 +389,6 @@ const GARBAGE_IMAGE_3 = new Image();
 GARBAGE_IMAGE_3.src = "./images/garbage_3.png";
 const GARBAGE_IMAGES = [GARBAGE_IMAGE_1, GARBAGE_IMAGE_2, GARBAGE_IMAGE_3];
 var garbagePileSlowingCoefficient = 0.4;
-
-const HELMINTH_IMAGE = new Image();
-HELMINTH_IMAGE.src = "./images/helminth.png";
-
-
 
 const PAUSE_SCREEN = new Image();
 PAUSE_SCREEN.src = "./images/pause_screen.png";
@@ -400,8 +432,6 @@ var EdgeCellX;
 const tissueCellDeathRate = 0.000001;
 
 // Immune cells
-const LYMPHOCYTES_DEFAULT_IMAGE = new Image();
-LYMPHOCYTES_DEFAULT_IMAGE.src = "./images/lymphocyte_test.png";
 const FIRST_LYMPHOCYTE = new Image();
 FIRST_LYMPHOCYTE.src = "./images/Blymphocytes_first.png";
 const SECOND_LYMPHOCYTE = new Image();
@@ -495,29 +525,32 @@ var TLYMPHOCYTE_DAMAGE = 1;
 //      Lymphocytes
 const randomTargetNumber = 5;
 const TlymphocyteReproductionNumber = 5;
+var trainingProbability = 0.01;
 
 // Helper
 var HELPER_BUYING_COOLDOWN = 30000;
 const HELPER_DISCOUNT_RATE = 1;
 const HELPER_DAMAGE_INCREASE = 1.1;
 
-// Upgrade
-const UPGRADE_FIRST = new Image();
-UPGRADE_FIRST.src = "./images/upgrade_first.png";
-const UPGRADE_FIRST_SIZE = 0.022*fieldHeight;
 
 const UPGRADE_PLASMATIC = new Image();
 UPGRADE_PLASMATIC.src = "./images/upgrade_plasmatic.png";
 const UPGRADE_MEMORY = new Image();
 UPGRADE_MEMORY.src = "./images/upgrade_memory.png";
 
-const UPGRADE_LABEL_HEIGHT = 0.037*fieldHeight;
-const UPGRADE_LABEL_WIDTH = 0.069*fieldWidth;
-
 // Antibodies
 ANTIBODY_LONGEVITY = 10000;
 ANTIBODY_PRODUCTION_FREQUENCY = 50;
 ANTIBODY_SLOWING_COEFFICIENT = 0.5;
+
+
+// Upgrade
+const UPGRADE_FIRST = new Image();
+UPGRADE_FIRST.src = "./images/upgrade_first.png";
+const UPGRADE_FIRST_SIZE = 0.022*fieldHeight;
+
+const UPGRADE_LABEL_HEIGHT = 0.037*fieldHeight;
+const UPGRADE_LABEL_WIDTH = 0.069*fieldWidth;
 
 
 
